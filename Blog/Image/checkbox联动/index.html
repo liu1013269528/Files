@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>checkbox 联动</title>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th><input type="checkbox" id="check-all"></th>
+				<th>姓名</th>
+				<th>QQ号</th>
+				<th>数据</th>
+			</tr>
+		</thead>
+		<tr>
+			<td><input type="checkbox" name="check-item" data-id="1"></td>
+			<td>zZ爱吃菜</td>
+			<td>1013269528</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="check-item" data-id="2"></td>
+			<td>zZ爱吃菜</td>
+			<td>1013269528</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="check-item" data-id="3"></td>
+			<td>zZ爱吃菜</td>
+			<td>1013269528</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="check-item" data-id="4"></td>
+			<td>zZ爱吃菜</td>
+			<td>1013269528</td>
+			<td>4</td>
+		</tr>
+	</table>
+	<button class="btn btn-primary" id="btnGetData">获取选中的数据</button>
+	<input type="text" id="inputData" class="form-control">
+	<script type="text/javascript">
+		$(function(){
+			$("#check-all").on('change',function(){
+				if(this.checked){
+					// 主 checked 选中： 
+					$("input[name='check-item']").each(function(){
+						this.checked = true
+					})
+				} else {
+					// 主 checked 不选中： 
+					$("input[name='check-item']").each(function(){
+						this.checked = false
+					})
+				}
+			});
+			$("#btnGetData").on('click',function(){
+				var data = "";
+				$("input[name='check-item']").each(function(){
+					if(this.checked){
+						data = (data)? data+'-'+$(this).data('id'):$(this).data('id');
+					}
+				})
+				$("#inputData").val(data);
+			})
+		})
+	</script>
+</body>
+</html>
